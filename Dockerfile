@@ -2,7 +2,8 @@
 # use "docker images" to find <image>:<tag> pairs
 FROM ubuntu:12.04
 
-CMD apt-get update
-CMD apt-get -y install wget ca-certificates
-CMD wget -O - http://bootstrap.saltstack.org | sh
+ADD etc/apt/sources.list /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -y install wget ca-certificates
+RUN wget -O - http://bootstrap.saltstack.org | sh
 
