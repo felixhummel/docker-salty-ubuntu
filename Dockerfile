@@ -2,8 +2,16 @@
 # use "docker images" to find <image>:<tag> pairs
 FROM ubuntu:12.04
 
-ADD etc/apt/sources.list /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get -y install wget ca-certificates
-RUN wget -O - http://bootstrap.saltstack.org | sh
+RUN apt-get install --yes --no-install-recommends\
+        wget sudo python-software-properties
+RUN add-apt-repository --yes ppa:saltstack/salt
+RUN apt-get update
+
+RUN dpkg-divert --local --rename --add /sbin/initctl
+RUN ln -s /bin/true /sbin/initctl
+
+RUN apt-get install --yes --no-install-recommends\
+        salt-minion
 
