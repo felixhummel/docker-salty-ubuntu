@@ -1,7 +1,0 @@
-
-Dockerfile here, then::
-
-    sudo docker build .
-
-.. vim: set ft=rst :
-

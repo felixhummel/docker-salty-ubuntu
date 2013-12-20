@@ -5,7 +5,10 @@ FROM ubuntu:12.04
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install --yes --no-install-recommends\
-        wget sudo python-software-properties
+        wget\
+        sudo\
+        python-software-properties\
+        pciutils  # for grains
 RUN add-apt-repository --yes ppa:saltstack/salt
 RUN apt-get update
 
